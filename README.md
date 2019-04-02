@@ -23,7 +23,7 @@ I went directly to GNU and downloaded ncurses-6.1 and installed it through termi
 because it was compiling my code but not actually showing me the other console when I ran it. That was when I
 used g++ [file name] -lncurses instead of clang++ and now it works fine.
 
-
+April 1
 
 #include <ncurses.h>
 
@@ -38,3 +38,6 @@ int main(){
 }
 
 was the first.cpp file that i made. I ran it with g++ first.cpp -lncurses on terminal, and it ran without any problem.
+
+move(int, int); moves the cursor to a place on the console.
+mvprintw(int,int,*char); does the same thing.
