@@ -44,6 +44,8 @@ mvprintw(int,int,*char); does the same thing.
 
 
 April 3
+
+
 {
 #include <ncurses.h>
 
@@ -60,5 +62,8 @@ int main(){
 }
 }
 
+
 the getmaxyx() function calculated the max of x and y values and by moving the cursor to y/2,x/2, I was able to
-estimate the center of the screen. 
+estimate the center of the screen.
+
+attron(%char_BOLD) and attroff(%char_BOLD) allows the character on display to be bolded at command.
