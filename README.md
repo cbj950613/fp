@@ -41,3 +41,24 @@ was the first.cpp file that i made. I ran it with g++ first.cpp -lncurses on ter
 
 move(int, int); moves the cursor to a place on the console.
 mvprintw(int,int,*char); does the same thing.
+
+
+April 3
+{
+#include <ncurses.h>
+
+int main(){
+	initscr();
+	int x,y;
+	getmaxyx(stdscr,y,x);
+	move(y/2,x/2);
+	printw("a");
+	refresh();
+	getch();
+	endwin(); //deallocate memory
+	return 0;
+}
+}
+
+the getmaxyx() function calculated the max of x and y values and by moving the cursor to y/2,x/2, I was able to
+estimate the center of the screen. 
