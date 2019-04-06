@@ -16,7 +16,7 @@ snakeclass::snakeclass(){
 	nodelay(stdscr,true); //the program doesn't wait until user press
 	keypad(stdscr,true); //initializes the keyboard
 	noecho();
-	curse_set(0); //makes cursor invisible
+	curs_set(0); //makes cursor invisible
 	getmaxyx(stdscr,maxheight,maxwidth);
 	//initialize variables
 	partchar = 'x';
@@ -56,7 +56,7 @@ snakeclass::snakeclass(){
 	move(maxheight-1,0);
 	printw("%d",points);
 	move(food.y,food.x);
-	add(ch);
+	addch(foo);
 	refresh();
 }
 snakeclass::~snakeclass(){
