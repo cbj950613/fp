@@ -67,3 +67,32 @@ the getmaxyx() function calculated the max of x and y values and by moving the c
 estimate the center of the screen.
 
 attron(%char_BOLD) and attroff(%char_BOLD) allows the character on display to be bolded at command.
+
+
+April 5
+
+code:
+
+
+
+#include <ncurses.h>
+
+int main(){
+	initscr();
+	start_color();
+	init_pair(1,COLOR_RED,COLOR_BLACK);
+	attron(COLOR_PAIR(1));
+	printw("Something");
+	attroff(COLOR_PAIR(1));
+	refresh();
+	getch();
+	endwin(); //deallocate memory
+	return 0;
+}
+
+init_pair() initilizes a pair of the color. Like on the previous code example, attron() and attroff() allows the text to be changed in its nature.
+For example, attron(COLOR_PAIR(2)) will make the text black instead because the color pair is (red,black).
+
+-----starting with the snake.cpp-----
+
+
