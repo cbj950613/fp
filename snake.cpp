@@ -29,7 +29,7 @@ snakeclass::snakeclass(){
 	}
 	points = 0;
 	del = 110000;
-	get = false;
+	get = 0;
 	direction = 'l';
 	srand(time(0));
 	putfood();
@@ -72,9 +72,8 @@ void snakeclass::putfood(){
 		for(int i = 0; i < snake.size(); i++)
 			if(snake[i].x == tmpx && snake[i].y == tmpy)
 				continue;
-		if(tmpx>=maxwidth-2 || tmpy>=maxheight-3){
+		if(tmpx>=maxwidth-2 || tmpy>=maxheight-3)
 			continue;
-		}
 		food.x=tmpx;
 		food.y=tmpy;
 		break;
@@ -87,10 +86,14 @@ void snakeclass::putfood(){
 bool snakeclass::collision(){
 	if(snake[0].x==0 || snake[0].x == maxwidth-1 || snake[0].y==0 || snake[0].y == maxheight-2)
 		return true;
-	for(int i = 2; i < snake.size(); i++){
-		if(snake[0].x == snake[i].x && snake[i].y == snake[0].y)
+	for(int i = 2; i < snake.size(); i++)
+	{
+		if(snake[0].x == snake[i].x && snake[0].y == snake[i].y)
 			return true;
 	}
+
+	//collision with the food
+
 	if(snake[0].x == food.x && snake[0].y == food.y)
 	{
 		get = true;
@@ -98,11 +101,11 @@ bool snakeclass::collision(){
 		points+=10;
 		move(maxheight-1,0);
 		printw("%d", points);
-		if(points%100 == 0)
+		if((points%20) == 0)
 			del-=10000;
-		else
-			get = false;
 	}
+	else
+		get = false;
 	return false;
 }
 
@@ -135,7 +138,8 @@ void snakeclass::movesnake()
 	if(!get)
 	{
 		move(snake[snake.size()-1].y,snake[snake.size()-1].x);
-		addch(' ');
+		//addch(' ');
+		printw(" ");
 		refresh();
 		snake.pop_back();
 	}
