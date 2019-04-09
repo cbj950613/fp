@@ -2,6 +2,7 @@
 #include <ncurses.h>
 #include <vector>
 #include <cstdlib>
+#include <unistd.h>
 #ifndef SNAKE_H
 #define SNAKE_H
 struct snakepart{
