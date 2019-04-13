@@ -1,8 +1,11 @@
-#include "snake.h"
+#include "snakeqt.h"
+#include <QApplication>
 
-int main(){
+int main(int argc, char *argv[])
+{
+    QApplication a(argc, argv);
+    snakeqt w;
+    w.show();
 
-	snakeclass s;
-	s.start();
-	return 0;
+    return a.exec();
 }
