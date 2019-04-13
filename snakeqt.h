@@ -28,20 +28,20 @@ protected:
 private:
     static const int maxwidth = 500;
     static const int maxheight = 500;
-    int dot_size = 10;
-    int del = 100;
-    int dots = 900;
+    static const int dot_size = 10;
+    static const int del = 100;
+    static const int thedots = 900;
 
     QImage food;
     QImage snakeparts;
     QImage snakehead;
 
-    int points;
+    int dots;
     int food_x;
     int food_y;
     int time;
-    int x[dots];
-    int y[dots];
+    int x[thedots];
+    int y[thedots];
     bool left;
     bool right;
     bool up;
@@ -50,6 +50,8 @@ private:
 
     void startgame();
     void putfood();
+    void collision();
+    void checkfood();
     void movesnake();
     void draw();
     void game_over(QPainter &);

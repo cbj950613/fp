@@ -25,10 +25,10 @@ snakeqt::snakeqt(QWidget *parent) :
 }
 
 void snakeqt::startgame(){
-    for(int i = 0; i < points; i++){
+    dots = 3;
+    for(int i = 0; i < dots; i++){
         snake.push_back(snakepart(40+i,10));
     }
-    points = 0;
     putfood();
     time = startTimer(del);
 }
@@ -55,4 +55,28 @@ void snakeqt::draw(){
         game_over(qp);
 
     }
+}
+
+void snakeqt::game_over(QPainter &qp){
+    QString message = "game over!";
+    int h = height();
+    int w = width();
+    qp.translate(QPoint(w/2,h/2));
+}
+void snakeqt::checkfood(){
+    if((x[0] == food_x) && (y[0] == food_y)){
+        dots++;
+        putfood();
+    }
+}
+
+void snakeqt::movesnake(){
+    for( int i = dots; i > 0; i--){
+        x[i] = x[i-1];
+        y[i] = y[i-1];
+    }
+    if(left){
+        x[0] -= dot_size;
+    }
+    if(right)
 }
