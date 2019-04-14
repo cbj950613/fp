@@ -2,6 +2,9 @@
 #define SNAKEQT_H
 #include <QKeyEvent>
 #include <QWidget>
+#include <vector>
+#include <iostream>
+#include <cstdlib>
 
 namespace Ui {
 class snakeqt;
@@ -20,6 +23,19 @@ class snakeqt : public QWidget
 public:
     snakeqt(QWidget *parent = 0);
     std::vector<snakepart> snake;
+    ~snakeqt();
+    void start();
+
+
+    int points, del, maxwidth, maxheight;
+    char direction, partchar, oldalchar, foo;
+    bool get;
+    snakepart food;
+
+    void putfood();
+    bool collision();
+    void movesnake();
+/*
 protected:
     void paintEvent(QPaintEvent *);
     void timerEvent(QTimerEvent*);
@@ -31,6 +47,7 @@ private:
     static const int dot_size = 10;
     static const int del = 100;
     static const int thedots = 900;
+    static const int rando = 29;
 
     QImage food;
     QImage snakeparts;
@@ -48,6 +65,7 @@ private:
     bool down;
     bool alive;
 
+    void loadimage();
     void startgame();
     void putfood();
     void collision();
@@ -57,6 +75,7 @@ private:
     void game_over(QPainter &);
 
     Ui::snakeqt *ui;
+    */
 };
 
 #endif // SNAKEQT_H

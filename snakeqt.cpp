@@ -14,6 +14,19 @@ snakepart::snakepart(){
 snakeqt::snakeqt(QWidget *parent) :
     QWidget(parent)
 {
+    food.x = 0;
+    food.y = 0;
+    for(int i = 0; i < 5; i++){
+        snake.push_back(snakepart(40+i,10));
+    }
+    points = 0;
+    del = 200;
+    get = 0;
+    direction = 'l';
+    srand(time(0));
+    putfood();
+
+    /*
     left = true;
     right = false;
     up = false;
@@ -21,13 +34,21 @@ snakeqt::snakeqt(QWidget *parent) :
     alive = true;
 
     resize(maxwidth, maxheight);
-    startgame();
+    loadimage();
+    startgame();*/
+}
+
+void snakeqt::loadimage(){
+    food.load("/Users/timcho/Downloads/images/reddot.png");
+    snakehead.load("/Users/timcho/Downloads/images/greendot.png");
+    snakeparts.load("/Users/timcho/Downloads/images/greendot.png");
 }
 
 void snakeqt::startgame(){
     dots = 3;
     for(int i = 0; i < dots; i++){
-        snake.push_back(snakepart(40+i,10));
+        x[i] = 50 - i * 10;
+        y[i] = 50;
     }
     putfood();
     time = startTimer(del);
@@ -78,5 +99,88 @@ void snakeqt::movesnake(){
     if(left){
         x[0] -= dot_size;
     }
-    if(right)
+    if(right){
+        x[0] += dot_size;
+    }
+    if(up){
+        y[0] -= dot_size;
+    }
+    if(down){
+        y[0] += dot_size;
+    }
+}
+
+void snakeqt::collision(){
+    for(int i = dots; i > 0; i--){
+        if((i>4) && (x[0] == x[i]) && (y[0] == y[i])){
+            alive = false;
+        }
+    }
+    if (y[0] >= maxheight) {
+            alive = false;
+        }
+
+        if (y[0] < 0) {
+            alive = false;
+        }
+
+        if (x[0] >= maxwidth) {
+            alive = false;
+        }
+
+        if (x[0] < 0) {
+            alive = false;
+        }
+
+        if(!alive) {
+            killTimer(time);
+        }
+}
+
+void snakeqt::putfood(){
+    QTime timetime = QTime::currentTime();
+    qsrand((uint) timetime.msec());
+    int a = qrand()%rando;
+    food_x = (a*dot_size);
+    a = qrand()%rando;
+    food_y = (a*dot_size);
+}
+
+void snakeqt::timerEvent(QTimerEvent *e){
+    Q_UNUSED(e);
+    if(alive){
+        checkfood();
+        collision();
+        movesnake();
+    }
+    repaint();
+}
+
+void snakeqt::keyPressEvent(QKeyEvent *e){
+    int key = e->key();
+    if ((key == Qt::Key_Left) && (!right)) {
+           left = true;
+           up = false;
+           down = false;
+       }
+
+       if ((key == Qt::Key_Right) && (!left)) {
+           right = true;
+           up = false;
+           down = false;
+       }
+
+       if ((key == Qt::Key_Up) && (!down)) {
+           up = true;
+           right = false;
+           left = false;
+       }
+
+       if ((key == Qt::Key_Down) && (!up)) {
+           down = true;
+           right = false;
+           left = false;
+       }
+
+       QWidget::keyPressEvent(e);
 }
